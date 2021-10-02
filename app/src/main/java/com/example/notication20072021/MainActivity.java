@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
                 notification.setContentText("Bạn có một voucher khuyến mãi được sử dụng trong ngày hôm nay");
                 notification.setSmallIcon(R.mipmap.ic_launcher);
                 notification.setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher));
+                notification.setStyle(new NotificationCompat.BigPictureStyle().bigPicture(BitmapFactory.decodeResource(getResources(), R.drawable.hinhpicture)));
                 notification.setShowWhen(true);
                 notification.setPriority(Notification.PRIORITY_HIGH);
                 notification.setVibrate(new long[]{500, 500, 500, 500});
