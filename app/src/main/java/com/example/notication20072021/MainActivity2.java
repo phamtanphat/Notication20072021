@@ -17,6 +17,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RemoteViews;
+import android.widget.TextView;
 
 public class MainActivity2 extends AppCompatActivity {
 
@@ -38,14 +40,14 @@ public class MainActivity2 extends AppCompatActivity {
                 PendingIntent pendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
 
                 NotificationCompat.Builder notification = new NotificationCompat.Builder(MainActivity2.this, "CHANNEL_ID");
-                notification.setContentTitle("App A");
-                notification.setContentText("Bạn có một voucher khuyến mãi được sử dụng trong ngày hôm nay");
+
+                RemoteViews remoteViews = new RemoteViews(getPackageName(),R.layout.layout_notification);
+                remoteViews.setTextViewText(R.id.textViewTitle,"Android App");
+                remoteViews.setOnClickPendingIntent(R.id.buttonOpenApp,pendingIntent);
+
                 notification.setSmallIcon(R.mipmap.ic_launcher);
-                notification.setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher));
-                notification.setStyle(new NotificationCompat.BigPictureStyle().bigPicture(BitmapFactory.decodeResource(getResources(), R.drawable.hinhpicture)));
-                notification.setShowWhen(true);
+                notification.setCustomContentView(remoteViews);
                 notification.setPriority(Notification.PRIORITY_HIGH);
-                notification.addAction(R.mipmap.ic_launcher,"Open App",pendingIntent);
                 notification.setVibrate(new long[]{500, 500, 500, 500});
 
                 Uri soundUri = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + getApplicationContext().getPackageName() + "/" + R.raw.yeulacuoi);
